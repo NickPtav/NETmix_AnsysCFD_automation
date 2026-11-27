@@ -4,7 +4,7 @@
 
 **Parametric CAD generation, numerical meshing and photocatalytic CFD simulation using CadQuery and Ansys Fluent.**
 
-This repository automates the construction and simulation of NETmix reactors, from geometric parameters to CFD results. The workflow supports individual reactors, reuse of existing geometries and meshes, and sequential batch studies.
+This repository was developed at the Universidade Federal de Santa Catarina (UFSC-BR), by Nicole Pan Tavares in collaboration with Cíntia Soares, Natan Padoin and Tatiana Matiazzo. It automates the construction and simulation of NETmix reactors, from geometric parameters to CFD results. The workflow supports individual reactors, reuse of existing geometries and meshes, and sequential batch studies.
 
 ```mermaid
 flowchart LR
