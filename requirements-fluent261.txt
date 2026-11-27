@@ -1,0 +1,2 @@
+# 2026 R1 requires PyFluent 0.43 or earlier. Keep existing working CAD pins.
+ansys-fluent-core==0.43.1

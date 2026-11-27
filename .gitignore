@@ -1,0 +1,61 @@
+# Virtual environments
+.venv/
+.venv312/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Simulation outputs
+output/
+*.cas.h5
+*.dat.h5
+*.msh.h5
+*.trn
+*.log
+
+# Compiled UDF libraries
+libudf/
+*.dll
+*.obj
+
+# VS Code settings
+.vscode/
+
+# Temporary files
+*.tmp
+*.bak
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# ============================================================
+# PRIVATE LOCAL CONFIGURATION
+# ============================================================
+
+local_config.py
+.env
+.env.local
+*.local.py
+
+# Personal notes
+private_notes/
+private/
+
+# Personal VS Code workspace
+*.code-workspace
+.vscode/
+
+# Virtual environment configuration
+pyvenv.cfg
+.venv/
+.venv312/
+venv/
+env/
+
+# Private configuration
+local_config.py
