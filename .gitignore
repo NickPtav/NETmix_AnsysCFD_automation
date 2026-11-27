@@ -59,3 +59,11 @@ env/
 
 # Private configuration
 local_config.py
+
+# Optical property libraries
+raytracing/input_files/*
+!raytracing/input_files/README.md
+
+# Original simulation projects and validation data
+raytracing/validation/*
+!raytracing/validation/README.md

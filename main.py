@@ -5,6 +5,9 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 import parameters
+from geometry.cfd.geometry_setup import generate
+from meshing.meshing_setup import mesh
+from solver.fluent_setup import run
 
 ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / 'output'
@@ -100,7 +103,7 @@ def main():
         else:
             if case.exists() and any(case.iterdir()):
                 raise RuntimeError('Case folder is not empty and has no geometry manifest; choose a new name.')
-            from geometry_setup import generate
+            from geometry.cfd.geometry_setup import generate
             generate(p,case)
     if not manifest.is_file() or not step.is_file():
         raise FileNotFoundError(f'Missing geometry.json or CFD.step in {case}; generate geometry first.')
@@ -109,7 +112,7 @@ def main():
         if key in GEOMETRY_KEYS:
             setattr(p,key,value)
     if args.stage in ('surface','mesh','all'):
-        from meshing_setup import mesh
+        from meshing.meshing_setup import mesh
         if args.case and getattr(p,'CAD_INPUT_OVERRIDE',None):
             raise RuntimeError('Disable CAD_INPUT_OVERRIDE when selecting a saved case, or verify and mesh it separately.')
         meshing = new_directory(case,'surface' if args.stage=='surface' else 'mesh')
@@ -125,7 +128,7 @@ def main():
         info = meshing / 'mesh_info.json'
         if not meshfile.is_file() or not info.is_file() or read_json(info).get('step_sha256') != hashlib.sha256(step.read_bytes()).hexdigest():
             raise RuntimeError('Mesh provenance missing or geometry changed; rerun --stage mesh.')
-        from fluent_setup import run
+        from solver.fluent_setup import run
         solve = args.stage in ('solve','all')
         out = new_directory(meshing,'solve' if solve else 'inspect')
         print('Selected mesh:',meshfile,flush=True)

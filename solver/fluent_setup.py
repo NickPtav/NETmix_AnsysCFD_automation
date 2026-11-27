@@ -2,13 +2,23 @@
 import json
 import shutil
 from pathlib import Path
-from meshing_setup import launch
-from zone_mapping import settings,map_zones,apply_zone_types
-from legacy_physics import configure_materials
-from post_processing import post_process
 from time import perf_counter
 
-ROOT=Path(__file__).resolve().parent
+from meshing.meshing_setup import launch
+
+from solver.zone_mapping import (
+    settings,
+    map_zones,
+    apply_zone_types
+)
+
+from solver.legacy_physics import configure_materials
+
+from postprocessing.post_processing import post_process
+
+ROOT = Path(__file__).resolve().parents[1]
+
+UDF_DIR = ROOT / "solver" / "udfs"
 
 def prepare_udf(solver, p, root, out):
 
@@ -16,7 +26,7 @@ def prepare_udf(solver, p, root, out):
     # SELECT UDF SOURCE
     # ============================================================
 
-    source = ROOT / 'UDF_tce.c'
+    source = UDF_DIR / 'UDF_tce.c'
 
     if p.IRRADIANCE_MODE == 'profile':
 
@@ -162,10 +172,12 @@ def configure_solver(solver,p,groups,out):
         for name in groups['non_catalytic_wall']: bc.wall[name].species.react=False
     root.solution.methods.p_v_coupling.flow_scheme='SIMPLE'
     if p.RUN_REACTION:
-        if p.IRRADIANCE_MODE=='profile':
-            if not p.ACCEPT_PROFILE_MAPPING: raise RuntimeError('Validate the profile coordinates, units and wall UDS UDF; set ACCEPT_PROFILE_MAPPING=True.')
-            if not p.PROFILE_FILE or not p.PROFILE_NAME: raise ValueError('Provide PROFILE_FILE and PROFILE_NAME from the current Speos case.')
-            profile=Path(p.PROFILE_FILE).expanduser().resolve()
+        if p.IRRADIANCE_MODE == 'profile':
+
+            source = Path(
+                p.PROFILE_UDF_SOURCE
+                or UDF_DIR / 'UDF_tce_profile.c'
+            ).resolve()
             if not profile.is_file(): raise FileNotFoundError(profile)
             root.file.read_profile(file_name=str(profile))
             solver.tui.define.user_defined.user_defined_scalars('1')

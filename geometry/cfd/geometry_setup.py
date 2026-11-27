@@ -2,9 +2,15 @@
 import json
 from pathlib import Path
 import cadquery as cq
-from geometry import build_netmix
-from boundaries import classify, export_named, COLORS
-from catalyst import make_catalyst
+from geometry.common.netmix_core import build_netmix
+
+from geometry.cfd.boundaries import (
+    classify,
+    export_named,
+    COLORS
+)
+
+from geometry.optical.catalyst import make_catalyst
 
 GEOMETRY_KEYS = ('N_ROWS','N_COLUMNS','D_PARALLEL','D_DIAGONAL','CHANNEL_WIDTH','H','HEIGHT','HORIZONTAL_CHANNELS','PORT_DIAMETER','PORT_LENGTH','PORT_SIDE','ILLUMINATION','CATALYST_THICKNESS','TOL')
 

@@ -10,6 +10,9 @@ import re
 import traceback
 from datetime import datetime
 from pathlib import Path
+from geometry.cfd.geometry_setup import generate
+from meshing.meshing_setup import mesh
+from solver.fluent_setup import run
 
 from main import (ROOT, OUTPUT, GEOMETRY_KEYS, config, case_name,
                   new_directory, read_json)
@@ -76,7 +79,7 @@ def verify_geometry(item, create=False):
             raise FileNotFoundError(f'{manifest}; run geometry stage first')
         if case.exists() and any(case.iterdir()):
             raise RuntimeError(f'Incomplete nonempty case {case}; inspect it or choose another CASE name')
-        from geometry_setup import generate
+        from geometry.cfd.geometry_setup import generate
         generate(p, case)
     if not step.is_file():
         raise FileNotFoundError(step)
@@ -101,13 +104,13 @@ def execute(item, stage):
     if stage == 'geometry':
         return str(step)
     if stage == 'mesh':
-        from meshing_setup import mesh
+        from meshing.meshing_setup import mesh
         out = new_directory(case, 'mesh')
         result = mesh(p, step, out, pause=False, surface_only=False)
         item['mesh'] = verify_mesh(result, step)
         return str(item['mesh'])
     if stage == 'solve':
-        from fluent_setup import run
+        from solver.fluent_setup import run
         chosen = item['mesh']
         if chosen is None:
             if item['selected']:

@@ -110,7 +110,7 @@ VALIDATE_BOUNDARY_AREAS = True
 # POST-PROCESSING CONFIGURATION
 # ============================================================
 
-RUN_POST_PROCESSING = True
+RUN_POST_PROCESSING = False
 
 # Maximum acceptable mass conservation error (%)
 MASS_BALANCE_TOL_PCT = 0.1
@@ -138,3 +138,139 @@ if _importlib_util.find_spec("local_config") is not None:
                 _local_config,
                 _name
             )
+
+# ============================================================
+# OPTICAL GEOMETRY
+# All dimensions in mm
+# ============================================================
+
+METAL_THICKNESS = 5.0
+
+GLASS_THICKNESS = 3.0
+
+CATALYST_THICKNESS = 0.0173
+
+PLATE_MARGIN_X = 4.75
+
+PLATE_MARGIN_Y = 4.92
+
+
+# ============================================================
+# LED ARRAY GEOMETRY
+# ============================================================
+
+LED_ROWS = 6
+
+LED_COLUMNS = 3
+
+LED_RADIUS = 1.45
+
+LED_GLASS_GAP = 13.6            
+
+# ============================================================
+# SPEOS CONFIGURATION
+# ============================================================
+
+RUN_RAYTRACING = False
+
+SPEOS_VERSION = "261"
+
+SPEOS_PORT = 50098
+
+SPEOS_BACKEND = "CPU"     # CPU or GPU
+
+SPEOS_THREADS = 4
+
+SPEOS_N_RAYS = 100_000
+
+SPEOS_TEST_RAYS = 100_000
+
+# ============================================================
+# OPTICAL INPUT FILES
+# ============================================================
+
+SPEOS_INPUT_DIR = (
+    Path(__file__).resolve().parent
+    / "raytracing"
+    / "input_files"
+)
+
+# ============================================================
+# OPTICAL MATERIALS
+# ============================================================
+# Options: "surface" or "volume"
+CATALYST_OPTICAL_MODE = "surface"
+
+METAL_REFLECTANCE = 90.0
+
+TIO2_VOLUME_FILE = "None"
+
+TIO2_SURFACE_FILE = "Advanced_TiO2_10.scattering"
+
+GLASS_VOLUME_FILE = "Borosilicate_Glass.material"
+
+
+# ============================================================
+# LED SOURCES
+# ============================================================
+
+LED_ROWS = 6
+
+LED_COLUMNS = 3
+
+LED_RADIANT_POWER_W = 0.9
+
+LED_INTENSITY_FILE = "CUN66A1B_160302.ies"
+
+LED_SPECTRUM_FILE = "LED_900.spectrum"
+
+
+# ============================================================
+# OPTICAL SENSOR
+# ============================================================
+
+SPEOS_SENSOR_NAME = "Catalyst_Irradiance"
+
+SPEOS_SIMULATION_NAME = "NETmix_Direct"
+
+from pathlib import Path
+
+# ============================================================
+# OPTICAL TESSELLATION
+# ============================================================
+
+OPTICAL_TOLERANCE = 0.01           # mm
+OPTICAL_ANGULAR_TOLERANCE = 0.2    # rad
+
+# ============================================================
+# SPEOS - OPTICAL GEOMETRY CONFIGURATION
+# ============================================================
+
+# Catalyst representation: "surface" or "volume"
+CATALYST_OPTICAL_MODE = "surface"
+
+# Include explicit gas domain in optical simulation
+INCLUDE_GAS_BODY = False
+
+# Optical surface tessellation
+OPTICAL_TOLERANCE = 0.01           # mm
+OPTICAL_ANGULAR_TOLERANCE = 0.2    # rad
+
+
+# ============================================================
+# SPEOS - SIMULATION CONFIGURATION
+# ============================================================
+
+SPEOS_VERSION = "261"
+
+SPEOS_BACKEND = "CPU"
+
+SPEOS_THREADS = 4
+
+SPEOS_N_RAYS = 15_000_000
+
+SPEOS_TEST_RAYS = 100_000
+
+SPEOS_SENSOR_NAME = "Catalyst_Irradiance"
+
+SPEOS_SIMULATION_NAME = "NETmix_Direct"
