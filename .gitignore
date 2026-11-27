@@ -67,3 +67,28 @@ raytracing/input_files/*
 # Original simulation projects and validation data
 raytracing/validation/*
 !raytracing/validation/README.md
+
+# Python environments
+.venv/
+.venv312/
+__pycache__/
+*.pyc
+
+# Simulation outputs
+output/
+
+# Local configuration
+local_config.py
+
+# Optical material resources
+raytracing/input_files/
+
+# Original validation projects
+raytracing/validation/
+
+# Speos generated files
+*.speos
+*.speosLightBox
+*.xmp
+*.xm3
+*.vtp
