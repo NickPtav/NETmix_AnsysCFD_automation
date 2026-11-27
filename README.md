@@ -1,5 +1,7 @@
 # NETmix CFD Automation
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 **Parametric CAD generation, numerical meshing and photocatalytic CFD simulation using CadQuery and Ansys Fluent.**
 
 This repository automates the construction and simulation of NETmix reactors, from geometric parameters to CFD results. The workflow supports individual reactors, reuse of existing geometries and meshes, and sequential batch studies.
@@ -601,4 +603,12 @@ Do not interpret a completed simulation or a passing validation flag as proof of
 
 ---
 
-**Research use:** cite the associated NETmix automation and photocatalysis publications when bibliographic information is available. A repository license and formal citation metadata should be provided by the maintainers before public distribution; no license or publication identifier is assumed here.
+## License
+
+This project is distributed under the MIT License.
+
+See the [LICENSE](LICENSE) file for more information.
+
+Ansys Fluent is proprietary software and requires a
+separate valid license. This project's license does
+not extend to third-party software or dependencies.
